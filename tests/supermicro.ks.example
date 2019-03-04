@@ -10,19 +10,22 @@ eula --agreed
 ignoredisk --only-use=sdb
 reboot
 text
-network --bootproto=static --device=eno1 --gateway=192.168.1.1 --ip=192.168.1.100 --nameserver=192.168.1.53 --netmask=255.255.255.0 --activate
-network --hostname=MY_HOST_NAME
+
+network  --bootproto=static --device={{ network_interface_name }} --gateway={{ host_default_gateway }} --ip={{ host_ip_address }} --nameserver={{ nameservers[0] }} --netmask={{ host_subnet_mask }} --activate
+network  --hostname={{ hostname }}
+rootpw --iscrypted {{ encrypted_password }}
+
 bootloader --location=mbr
 zerombr
 clearpart --all --initlabel --drives=sdb
-part swap --asprimary --fstype="swap" --size=1024
-part /boot --fstype xfs --size=200
+part /boot --fstype xfs --size=400
 #  the ondisk fixed a problem with disk selection saying nothign was selected
 part pv.01 --size=1 --grow --ondisk=sdb
-volgroup rootvg01 pv.01
-logvol / --fstype xfs --name=lv01 --vgname=rootvg01 --size=1 --grow
+volgroup root_vg pv.01
+logvol / --fstype xfs --name=root_lv --vgname=root_vg --size=47683
+logvol swap  --fstype="swap" --size=4096 --name=swap_lv --vgname=root_vg
 
-rootpw --iscrypted $6$NOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREAL
+
 
 %packages --nobase --ignoremissing
 @^minimal
@@ -62,3 +65,4 @@ yum clean all
 yum update -y
 systemctl enable fstrim
 %end
+
