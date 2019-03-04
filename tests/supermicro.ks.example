@@ -26,3 +26,4 @@ rootpw --iscrypted $6$NOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNO
 
 %packages --nobase --ignoremissing
 @core
+%end

@@ -26,3 +26,4 @@ rootpw --iscrypted $6$3t0WZfXSz/x7STQa$.UXWN7W8xgj3.wf4X7e6UiOPMRGkKm9jhfLSmIspZ
 
 %packages --nobase --ignoremissing
 @core
+%end
