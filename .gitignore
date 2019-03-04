@@ -70,3 +70,4 @@ docs/_build
 
 # remove real minimal ks from git
 minimal.ks
+supermicro.ks
