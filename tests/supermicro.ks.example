@@ -25,5 +25,40 @@ logvol / --fstype xfs --name=lv01 --vgname=rootvg01 --size=1 --grow
 rootpw --iscrypted $6$NOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREALNOTREAL
 
 %packages --nobase --ignoremissing
+@^minimal
+@compat-libraries
 @core
+@debugging
+@development
+@security-tools
+chrony
+kexec-tools
+keyutils
+fipscheck
+yum-priorities
+screen
+net-snmp
+net-snmp-utils
+gmp
+libgomp
+ntp
+sysstat
+mc
+wget
+curl
+net-tools
+lsof
+vim
+dnsmasq
+nmap
+telnet
+bind-utils
+%end
+
+
+%post --log=/root/post-install.log
+
+yum clean all
+yum update -y
+systemctl enable fstrim
 %end
