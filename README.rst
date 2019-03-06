@@ -121,13 +121,13 @@ In this case, the removable drive is /dev/sdb so we'll create the image and comp
 
 ::
 
-    dd if=/dev/sdb | gzip > ./usb_installer.dd.gz
+    dd if=/dev/sdb bs=1M status=progress | gzip > ./usb_installer.dd.gz
 
 to write the image to /dev/sdb.  Be VERY carefule.  this will destroy the target drive
 
 ::
 
-    gunzip -c ./usb_installer.dd.gz | dd of=/dev/sdb bs=1M
+    gunzip -c ./usb_installer.dd.gz | dd of=/dev/sdb bs=1M status=progress
 
 Som other related articles:
 
@@ -140,6 +140,8 @@ http://www.softpanorama.info/Commercial_linuxes/RHEL/Installation/installation_f
 
 kickstart shell troubleshooting by looking at logs:
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-consoles-logs-during-installation-x86
+
+
 
 
 Development
